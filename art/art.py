@@ -3,7 +3,7 @@
 from .art_dic import *
 from .art_param import *
 import os
-import random
+import secrets
 
 
 class artError(Exception):  # pragma: no cover
@@ -169,7 +169,7 @@ def art(artname, number=1, space=1, __detailed_return=False):
     arts = ART_NAMES
     if artname in ["random", "rand", "rnd"]:
         filtered_arts = list(set(arts) - set(RANDOM_FILTERED_ARTS))
-        artname = random.choice(filtered_arts)
+        artname = secrets.SystemRandom().choice(filtered_arts)
     elif artname not in art_dic:
         selected_art = min(arts, key=lambda x: distance_calc(artname, x))
         min_distance = distance_calc(artname, selected_art)
@@ -348,13 +348,13 @@ def wizard_font(text):
     """
     text_length = len(text)
     if text_length <= TEXT_XLARGE_THRESHOLD:
-        font = random.choice(XLARGE_WIZARD_FONT)
+        font = secrets.SystemRandom().choice(XLARGE_WIZARD_FONT)
     elif text_length <= TEXT_LARGE_THRESHOLD:
-        font = random.choice(LARGE_WIZARD_FONT)
+        font = secrets.SystemRandom().choice(LARGE_WIZARD_FONT)
     elif text_length <= TEXT_MEDIUM_THRESHOLD:
-        font = random.choice(MEDIUM_WIZARD_FONT)
+        font = secrets.SystemRandom().choice(MEDIUM_WIZARD_FONT)
     else:
-        font = random.choice(SMALL_WIZARD_FONT)
+        font = secrets.SystemRandom().choice(SMALL_WIZARD_FONT)
     return font
 
 
@@ -370,26 +370,26 @@ def indirect_font(font, text):
     """
     fonts = FONT_NAMES
     if font in ["rnd-small", "random-small", "rand-small"]:
-        font = random.choice(RND_SIZE_DICT["small_list"])
+        font = secrets.SystemRandom().choice(RND_SIZE_DICT["small_list"])
         return font
     if font in ["rnd-medium", "random-medium", "rand-medium"]:
-        font = random.choice(RND_SIZE_DICT["medium_list"])
+        font = secrets.SystemRandom().choice(RND_SIZE_DICT["medium_list"])
         return font
     if font in ["rnd-large", "random-large", "rand-large"]:
-        font = random.choice(RND_SIZE_DICT["large_list"])
+        font = secrets.SystemRandom().choice(RND_SIZE_DICT["large_list"])
         return font
     if font in ["rnd-xlarge", "random-xlarge", "rand-xlarge"]:
-        font = random.choice(RND_SIZE_DICT["xlarge_list"])
+        font = secrets.SystemRandom().choice(RND_SIZE_DICT["xlarge_list"])
         return font
     if font in ["random", "rand", "rnd"]:
         filtered_fonts = list(set(fonts) - set(RANDOM_FILTERED_FONTS))
-        font = random.choice(filtered_fonts)
+        font = secrets.SystemRandom().choice(filtered_fonts)
         return font
     if font in ["wizard", "wiz", "magic"]:
         font = wizard_font(text)
         return font
     if font in ["rnd-na", "random-na", "rand-na"]:
-        font = random.choice(NON_ASCII_FONTS)
+        font = secrets.SystemRandom().choice(NON_ASCII_FONTS)
         return font
     if font not in fonts:
         font = min(fonts, key=lambda x: distance_calc(font, x))
@@ -406,7 +406,7 @@ def indirect_decoration(decoration):
     """
     decorations = DECORATION_NAMES
     if decoration in ["random", "rand", "rnd"]:
-        decoration = random.choice(decorations)
+        decoration = secrets.SystemRandom().choice(decorations)
         return decoration
     if decoration not in decorations:
         decoration = min(decorations, key=lambda x: distance_calc(decoration, x))
@@ -422,7 +422,7 @@ def mix_letters():
     letters = fancy1_dic.copy()
     fonts = list(set(NON_ASCII_FONTS) - set(MIX_FILTERED_FONTS))
     for i in letters:
-        random_font = random.choice(fonts)
+        random_font = secrets.SystemRandom().choice(fonts)
         letters[i] = get_font_dic(random_font)[i]
     return letters
 

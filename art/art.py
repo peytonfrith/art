@@ -511,8 +511,7 @@ def text2art(
         raise artError(FONT_TYPE_ERROR)
     text = (' ' * space).join(text)
     text_temp = text
-    font = font.lower()
-    if font != "mix":
+    if (font := font.lower()) != "mix":
         font = indirect_font(font, text)
         letters = get_font_dic(font)
         if FONT_MAP[font][1]:

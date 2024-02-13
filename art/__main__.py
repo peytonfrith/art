@@ -27,8 +27,7 @@ def select_test(test_name="TEST"):
             "test2.py",
             optionflags=doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS | doctest.IGNORE_EXCEPTION_DETAIL,
             verbose=False)[0]
-    error_flag = error_flag_1 + error_flag_2
-    if error_flag == 0:
+    if (error_flag := error_flag_1 + error_flag_2) == 0:
         print("\n" + test_name + " Passed")
         sys.exit(error_flag)
     else:
